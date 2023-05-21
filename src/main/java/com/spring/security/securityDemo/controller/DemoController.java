@@ -11,8 +11,13 @@ public class DemoController {
 
     private final DemoService demoService;
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String hello() {
         return demoService.sayHello();
+    }
+
+    @GetMapping("/auth")
+    public String helloWithoutAuth() {
+        return demoService.sayHelloWithoutAuth();
     }
 }
