@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class CustomWebSecurityConfig {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
+    public User userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.withUsername("user")
                 .password(passwordEncoder.encode("password"))
                 .roles("USER")
