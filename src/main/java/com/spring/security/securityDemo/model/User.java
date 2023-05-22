@@ -1,22 +1,42 @@
 package com.spring.security.securityDemo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
-    private String id;
+    private String userId;
 
-    @Column(name = "user_name")
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "account_created", updatable = false)
+    @CreationTimestamp
+    private LocalDateTime accountCreated;
+
+    @Column(name = "account_updated")
+    @UpdateTimestamp
+    private LocalDateTime accountUpdated;
 
     @Column(name = "user_passwd")
     private String password;

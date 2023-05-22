@@ -43,14 +43,10 @@ public class UserDetailService implements UserDetailsService {
     }
 
     public String saveUser(UserModel userModel) {
-        String passwd = userModel.getPassword();
-        User user = new User();
-        String encodedPasswod = passwordEncoder.encode(passwd);
-        user.setPassword(encodedPasswod);
-        user.setEmail(userModel.getEmail());
-        user.setName(userModel.getName());
-        user.setRoles(userModel.getRoles());
+        String encodedPassword = passwordEncoder.encode(userModel.getPassword());
+        User user = User.builder().firstName(userModel.getFirstName()).lastName(userModel.getLastName())
+                .password(encodedPassword).email(userModel.getEmail()).roles(userModel.getRoles()).build();
         user = userRepository.save(user);
-        return user.getId();
+        return user.getUserId();
     }
 }

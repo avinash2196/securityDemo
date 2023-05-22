@@ -13,7 +13,9 @@ import java.util.List;
 @Builder
 public class UserModel {
 
-    private String name;
+    private String firstName;
+
+    private String lastName;
 
     private String password;
 
