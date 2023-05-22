@@ -16,7 +16,7 @@ public class DemoController {
         return demoService.sayHello();
     }
 
-    @GetMapping("/auth")
+    @GetMapping("/WithoutAuth")
     public String helloWithoutAuth() {
         return demoService.sayHelloWithoutAuth();
     }
