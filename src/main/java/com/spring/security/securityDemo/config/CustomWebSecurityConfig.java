@@ -20,12 +20,26 @@ public class CustomWebSecurityConfig {
     private final UserDetailService userDetailService;
     private final PasswordEncoder passwordEncoder;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/api/public/**",
+            "/api/public/authenticate",
+            "/actuator/*",
+            "/swagger-ui/**"
+    };
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable()).formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/WithoutAuth", "saveUser").permitAll()
+                        .requestMatchers("/WithoutAuth", "saveUser","/swagger-ui.html").permitAll()
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
                         .requestMatchers("/hello").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
