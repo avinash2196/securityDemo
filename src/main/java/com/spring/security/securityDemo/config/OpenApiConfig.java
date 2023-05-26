@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(info = @Info(title = "Security API"))
 @SecurityScheme(
-        name = "basicAuth",
+        name = "Bearer Authentication",
         type = SecuritySchemeType.HTTP,
-        scheme = "basic"
+        bearerFormat = "JWT",
+        scheme = "bearer"
 )
 public class OpenApiConfig {
 

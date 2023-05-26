@@ -14,7 +14,7 @@ public class DemoController {
 
     private final DemoService demoService;
 
-    @Operation(security = @SecurityRequirement(name = "basicAuth"))
+    @Operation(security = @SecurityRequirement(name = "Bearer Authentication"))
     @GetMapping(value = "/hello",produces = MediaType.APPLICATION_JSON_VALUE)
     public String hello() {
         return demoService.sayHello();
