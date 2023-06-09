@@ -45,6 +45,7 @@ public class CustomWebSecurityConfig {
                         .requestMatchers("/WithoutAuth", "saveUser", "/swagger-ui.html").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .requestMatchers("/hello").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/withParam\\?email=.*").hasAnyAuthority("USER","ADMIN")
                         .anyRequest().authenticated()
                 ).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
