@@ -42,7 +42,7 @@ public class CustomWebSecurityConfig {
                 .exceptionHandling(auth -> auth.authenticationEntryPoint(authEntryPoint))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/WithoutAuth", "saveUser", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/WithoutAuth", "saveUser", "/swagger-ui.html","/getToken").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .requestMatchers("/hello").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/withParam\\?email=.*").hasAnyAuthority("USER","ADMIN")

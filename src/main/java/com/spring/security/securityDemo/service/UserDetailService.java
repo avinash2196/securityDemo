@@ -1,9 +1,7 @@
 package com.spring.security.securityDemo.service;
 
 
-import com.spring.security.securityDemo.dto.UserModel;
 import com.spring.security.securityDemo.model.User;
-import com.spring.security.securityDemo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,12 +17,12 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserDetailService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final MemoryService memoryService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> opt = userRepository.findUserByEmail(username);
+        Optional<User> opt = memoryService.findUserByEmail(username);
 
         if (opt.isEmpty())
             throw new UsernameNotFoundException("User with user name: " + username + " not found !");
@@ -42,11 +40,11 @@ public class UserDetailService implements UserDetailsService {
 
     }
 
-    public String saveUser(UserModel userModel) {
+/*    public String saveUser(UserModel userModel) {
         String encodedPassword = passwordEncoder.encode(userModel.getPassword());
         User user = User.builder().firstName(userModel.getFirstName()).lastName(userModel.getLastName())
                 .password(encodedPassword).email(userModel.getEmail()).roles(userModel.getRoles()).build();
         user = userRepository.save(user);
         return user.getUserId();
-    }
+    }*/
 }

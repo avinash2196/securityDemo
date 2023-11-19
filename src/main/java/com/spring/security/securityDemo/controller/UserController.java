@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
 
+/*
     @PostMapping("/saveUser")
     public String saveUser(
             @RequestBody UserModel user
@@ -28,6 +30,7 @@ public class UserController {
         String userId = userDetailService.saveUser(user);
         return userId;
     }
+*/
 
     @PostMapping("/authenticate")
     public String authentication(@RequestBody AuthRequest authRequest) {
@@ -38,4 +41,11 @@ public class UserController {
         else
             throw new UsernameNotFoundException("Invalid User Request");
     }
+
+    @GetMapping("/getToken")
+    public String getToken() {
+
+
+            return jwtService.generateToken("test");
+       }
 }
